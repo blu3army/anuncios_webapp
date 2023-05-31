@@ -1,5 +1,7 @@
-import { categorias } from '@/models/Categoria'
+import { Categoria, categorias } from '@/models/Categoria'
 import Link from 'next/link'
+import { useState } from 'react';
+import CatNavigate from './components/car_navigate';
 
 export default function Home() {
 
@@ -39,6 +41,17 @@ export default function Home() {
                 }
             </ul>
 
+
+            <div className='mt-10'>
+                <h1>Navegador de categorías</h1>
+
+                <CatNavigate  />
+
+            </div>
+
         </main>
     )
 }
+
+
+

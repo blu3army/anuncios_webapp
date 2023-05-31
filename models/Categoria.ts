@@ -1,8 +1,8 @@
 
 interface CategoriaInterface {
 
-    parent?: CategoriaInterface;
-    children: CategoriaInterface[];
+    parent?: Categoria;
+    children: Categoria[];
 
     name: string;
     code: string;
@@ -11,10 +11,10 @@ interface CategoriaInterface {
 
 
 
-class Categoria implements CategoriaInterface {
+export class Categoria implements CategoriaInterface {
     
-    parent?: CategoriaInterface;
-    children: CategoriaInterface[] = [];
+    parent?: Categoria;
+    children: Categoria[] = [];
     
     name: string;
     code: string;
@@ -38,6 +38,19 @@ class Categoria implements CategoriaInterface {
 }
 
 
+let tercercategorias : Categoria[] = [
+    new Categoria({
+        code: "automoviles",
+        name: "Automóviles", 
+    }),
+       
+    new Categoria({
+        code: "trucks",
+        name: "Camionetas",
+    })
+]
+
+
 let subcategorias:Categoria[] = [
     new Categoria({
         code: "departamentos",
@@ -45,8 +58,8 @@ let subcategorias:Categoria[] = [
     }),
        
     new Categoria({
-        code: "automoviles",
-        name: "Automóviles",
+        code: "rodados",
+        name: "Vehículos",
     })
 
 ]
@@ -75,7 +88,8 @@ let categorias:Categoria[] = [
     }),
 ]
 
-
+subcategorias[1].addChildren(tercercategorias[0]);
+subcategorias[1].addChildren(tercercategorias[1]);
 
 categorias[0].addChildren(subcategorias[0]);
 categorias[1].addChildren(subcategorias[1]);
