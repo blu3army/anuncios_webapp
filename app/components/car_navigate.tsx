@@ -13,12 +13,19 @@ export default function CatNavigate(){
     const [selectedCat, setSelectedCat] = useState<Categoria | null>(null);
 
 
-    const goTo = (cat:Categoria)=>{
+    const goTo = (cat:Categoria | null)=>{
 
-        setList(cat.children);
-        setSelectedCat(cat);
+        if(!cat){
+            setList(categorias);
+            setSelectedCat(null);
+        }
+        else{
+            setList(cat.children);
+            setSelectedCat(cat);
+    
+            pathGenerator(cat);
+        }
 
-        pathGenerator(cat);
 
     }
 
@@ -60,13 +67,15 @@ export default function CatNavigate(){
 
             <h1 className="font-semibold mt-5">
                 
-                Home
+                <span className="" onClick={()=> goTo(null)}>
+                    Home
+                </span>
                 {
                     selectedCat && 
                     pathGenerator(selectedCat).map( (cat, i)=>{
                         return(
                             <span key={i} onClick={()=> goTo(cat) }>
-                                &gt; {cat.name}
+                                &nbsp;&gt; {cat.name}
                             </span>
                         )
                     })

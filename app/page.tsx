@@ -1,6 +1,5 @@
-import { Categoria, categorias } from '@/models/Categoria'
+import { categorias } from '@/models/Categoria'
 import Link from 'next/link'
-import { useState } from 'react';
 import CatNavigate from './components/car_navigate';
 
 export default function Home() {

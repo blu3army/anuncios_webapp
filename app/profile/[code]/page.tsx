@@ -8,7 +8,7 @@ type Username = {
 
 async function getUsername({code}:{code:string}) {
     
-    const response = await fetch(`http://localhost:8080/username/${code}/id/987789`);
+    const response = await fetch(`http://localhost:8080/username/${code}/id/987789`, { cache : 'no-store'});
     const username:Username = await response.json();
     
     console.log("----------------------- RESPONSE ---------------------------", username);
