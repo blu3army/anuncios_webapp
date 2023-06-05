@@ -1,7 +1,15 @@
 import { categorias } from '@/models/Categoria'
 import Link from 'next/link'
 import CatNavigate from './components/car_navigate';
+import { Metadata } from 'next';
 
+
+//Metadatas
+export const metadata : Metadata = {
+    title: "Anuncios | Home"
+}
+
+//Page
 export default function Home() {
 
 

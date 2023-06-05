@@ -15,6 +15,12 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <div className='py-10 px-20 '>
+                    
+                    <p>--- Layout ---</p>
+                    <div className='bg-blue-200 py-5'>
+                        <h1 className='font-semibold text-lg'>Barra de navegación</h1>
+                    </div>
+
                     {children}
                 </div>
             </body>
