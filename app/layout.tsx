@@ -14,7 +14,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <div className='py-10 px-20 '>
+                <div className='py-2 px-20 '>
                     
                     <p>--- Layout ---</p>
                     <div className='bg-blue-200 py-5'>
