@@ -1,7 +1,6 @@
-import { categorias } from '@/models/Categoria'
 import Link from 'next/link'
-import CatNavigate from './components/car_navigate';
 import { Metadata } from 'next';
+import { CitiesDB } from '@/databases/cities-db';
 
 
 //Metadatas
@@ -12,50 +11,43 @@ export const metadata : Metadata = {
 //Page
 export default function Home() {
 
-
-    console.log("children", categorias[0].children[0].parent?.name);
-    
-
-
     return (
         <main className="">
-            
-            <h1>Anuncions front</h1>
-            <Link href='/admin'>
-                Go to Admin
-            </Link>
+            <h1 className='title-1'>Home page</h1>
 
-            <hr className='my-5'/>
+            <h2 className='title-2'>
+                Elegir ciudad de búsqueda, que puede detectarse automaticamente de ser posible, sino que elija el client
+            </h2>
 
 
-            <ul>
-                {
-                    categorias.map( (cat, i) => {
+            {/* Cuando no tenemos ciudad seleccionada */}
+            <div>
+                <p className='advice'>Imagen de fondo</p>
+                <input type='text' placeholder='Buscar ciudad' className='p-1' />
+                <button className='bg-stone-600 text-stone-200 p-1'>Go</button>
+                <div>
+                    
+                    {
+                        CitiesDB.map((city, i)=>
+                            <Link href={`/home/${city.code}`} key={i}>
+                                <p>
+                                    {city.name}
+                                </p>
+                            </Link>
+                        )
+                    }
 
-                        return <li key={i}>
-                            <p className='font-semibold'>
-                                {cat.name}
-                            </p>
-                            
-                            <ul className='text-sm'>
-                                {
-                                    cat.children.map( (subcat, i) => <li key={i}>{subcat.name} - Hijo de {subcat.parent?.name}</li> )
-                                }
-                            </ul>
-                        
-                        </li> 
-                    })
-                }
-            </ul>
+                </div>
+            </div>
 
 
-            <div className='mt-10'>
-                <h1>Navegador de categorías</h1>
-
-                <CatNavigate  />
+            {/* Una vez que tenemos ciudad seleccionada, mostramos rubros y categorias */}
+            <div>
 
             </div>
 
+
+         
         </main>
     )
 }

@@ -1,9 +1,11 @@
-import './css/globals.css'
+import '@/css/globals.css';
+import '@/css/titles.css';
+import '@/css/buttons.css';
 
 
 export const metadata = {
-title: 'Anuncios Today',
-description: 'Anuncios Today App - Un lugar donde puedes ofrecer lo que quieras!',
+    title: 'Anuncios Today',
+    description: 'Anuncios Today App - Un lugar donde puedes ofrecer lo que quieras!',
 }
 
 export default function RootLayout({
@@ -14,13 +16,10 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <div className='py-2 px-20 '>
-                    
-                    <p>--- Layout ---</p>
-                    <div className='bg-blue-200 py-5'>
-                        <h1 className='font-semibold text-lg'>Barra de navegación</h1>
+                <div className='px-10 '>                                        
+                    <div className='bg-blue-200 py-1 mb-1'>
+                        <h1 className='font-semibold text-lg'>Barra de navegación general</h1>
                     </div>
-
                     {children}
                 </div>
             </body>

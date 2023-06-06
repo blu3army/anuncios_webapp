@@ -1,4 +1,4 @@
-import SimpleButton from "@/app/components/simple_button";
+import SimpleButton from "@/components/simple_button";
 
 
 type Username = {

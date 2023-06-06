@@ -1,0 +1,11 @@
+.title-1{
+    @apply text-2xl font-semibold;
+}
+
+.title-2{
+    @apply text-lg;
+}
+
+.advice{
+    @apply text-green-600;
+}
