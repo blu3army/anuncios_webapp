@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next';
 import { CitiesDB } from '@/databases/cities-db';
+import { tree, treeGenerator } from '@/databases/categorias-tree';
 
 
 //Metadatas
@@ -10,6 +11,16 @@ export const metadata : Metadata = {
 
 //Page
 export default function Home() {
+
+
+    // console.log("root",tree);
+    // console.log("tree[0]", tree[0]);
+    // console.log("tree[0].children", tree[0].children);
+    // console.log("tree[0].children[0]", tree[0].children[0]);
+    console.log("tree[0].children[0].children", tree[0].children[1].children);
+    
+    
+
 
     return (
         <main className="">

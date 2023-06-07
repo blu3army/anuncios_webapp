@@ -1,5 +1,10 @@
 import { Categoria } from "@/models/Categoria";
 
+type CategoriaData = {
+    code: string,
+    name: string,
+    children?: string[],
+}
 
 let rubrosData = [
     {
@@ -30,68 +35,101 @@ let categoriasData = [
     {
         code: 'casas',
         name: 'Casas',
-        children: []
+        children: [
+            'casas-de-campo',
+            'casas-familiares'
+        ]
     },
     {
         code: 'rodados',
         name: 'Vehículos',
-        children: [],
+        children: [
+            'automoviles',
+            'trucks'
+        ],
     }
 ]
 
 
-
-
-
-
-
-
-
-
-let subcategorias : Categoria[] = [
-    new Categoria({
+let subcategoriasData = [
+    {
         code: "automoviles",
-        name: "Automóviles", 
-    }),
-    new Categoria({
+        name: "Automóviles",         
+    },
+    {
         code: "trucks",
-        name: "Camionetas",
-    })
+        name: "Camionetas",        
+    },
+    {
+        code: 'casas-de-campo',
+        name: 'Casas de campo',
+    },
+    {
+        code: 'casas-familiares',
+        name: 'Casas familiares'
+    }
 ]
 
-let categorias:Categoria[] = [
-    new Categoria({
-        code: "departamentos",
-        name: "Departamentos", 
-    }), 
-    new Categoria({
-        code: "rodados",
-        name: "Vehículos",
-    })
-]
 
-let rubros:Categoria[] = [
-    new Categoria({
-        code: "alquileres",
-        name: "Alquileres",
-    }),
-    new Categoria({
-        code: "marketplace",
-        name: "Compras y Ventas",
+export function treeGenerator(...categoriaArrays:CategoriaData[][]):Categoria[]{
+    
+    let tree = [];
+    
+
+    //Recorremos el primer nivel
+    for (const catData of categoriaArrays[0]) {
         
-    }),
-    new Categoria({
-        code: "trabajo",
-        name: "Bolsa de trabajo",
-    }),
-    new Categoria({
-        code: "eventos",
-        name: "Eventos",
-    }),
-]
+        //Agregamos al tree
+        let newCat = new Categoria( { name: catData.name, code: catData.code} );
+        
+        newCat = walkChildren(newCat, catData.children || [], 0, categoriaArrays[1], categoriaArrays[2] );
+        
+        tree.push(newCat);
+    }
 
 
 
+
+    // return arr.map( (c)=> new Categoria({name: c.name, code: c.code}) )
+    return tree;
+}
+
+
+function walkChildren(cat:Categoria, childrenCodes:string[], pointer:number,  ...nextDataArray: CategoriaData[][]):Categoria{
+
+    if (pointer === nextDataArray.length) {
+        return cat;
+    }
+
+    //Recorremos los hijos del primer nivel, siempre que tenga
+    if(childrenCodes && childrenCodes.length > 0){
+        for (const childCode of childrenCodes) {
+            //Buscamos dentro del siguiente nivel
+            for (const sub of nextDataArray[pointer]) {
+                if(sub.code === childCode){
+                    
+                    let childCat =  new Categoria({name: sub.name, code: sub.code});
+                    
+                    childCat = walkChildren(childCat, sub.children || [], pointer+1, ...nextDataArray);
+                    
+                    cat.addChildren(childCat);
+
+                }
+            }
+        }
+
+        return cat;
+    }
+    else{
+        return cat;
+    }
+
+}
+
+
+
+
+let tree : Categoria[] = treeGenerator(rubrosData, categoriasData, subcategoriasData);
 
 
 
@@ -102,4 +140,4 @@ let rubros:Categoria[] = [
 // categorias[1].addChildren(subcategorias[1]);
 
 
-export {categorias};
+export {tree};
