@@ -21,6 +21,11 @@ let rubrosData = [
         children: [
             'rodados'
         ]
+    },
+    {
+        code: 'jobs',
+        name: 'Bolsa de trabajo',
+        children: ['finance'],
     }
 ];
 
@@ -47,6 +52,15 @@ let categoriasData = [
             'automoviles',
             'trucks'
         ],
+    },
+    {
+        code: 'finance',
+        name: 'Contabilidad y Finanzas',
+        children: [
+            'contador', 
+            'administrativo', 
+            'tesorero'
+        ]
     }
 ]
 
@@ -67,11 +81,24 @@ let subcategoriasData = [
     {
         code: 'casas-familiares',
         name: 'Casas familiares'
+    },
+    {
+        code: 'contador',
+        name: 'Contador',
+    },
+    {
+        code: 'administrativo',
+        name: 'Administrativo',
+
+    },
+    {
+        code: 'tesorero',
+        name: 'Tesorero',
     }
 ]
 
 
-export function treeGenerator(...categoriaArrays:CategoriaData[][]):Categoria[]{
+function treeGenerator(...categoriaArrays:CategoriaData[][]):Categoria[]{
     
     let tree = [];
     //Recorremos el primer nivel
@@ -124,14 +151,6 @@ function walkChildren(cat:Categoria, childrenCodes:string[], pointer:number,  ..
 
 
 let tree : Categoria[] = treeGenerator(rubrosData, categoriasData, subcategoriasData);
-
-
-
-// subcategorias[1].addChildren(tercercategorias[0]);
-// subcategorias[1].addChildren(tercercategorias[1]);
-
-// categorias[0].addChildren(subcategorias[0]);
-// categorias[1].addChildren(subcategorias[1]);
 
 
 export {tree};

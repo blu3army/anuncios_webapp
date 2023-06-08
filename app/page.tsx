@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next';
 import { CitiesDB } from '@/databases/cities-db';
 import { tree } from '@/databases/categorias-tree';
+import { Categoria } from '@/models/Categoria';
 
 
 //Metadatas
@@ -56,45 +57,10 @@ export default function Home() {
             <div>
             </div>
 
-            
-
-            <div className='mt-10'>
-                {
-                    tree.map( (cat,i) => 
-                        <p key={i}>
-                            <p>
-                                {cat.name}
-                            </p>
-                            {
-                                catChildren(cat)
-                            }
-                        </p>
-                    )
-                }
-            </div>
-
-
-         
+                    
         </main>
     )
 }
 
 
-function catChildren(cat:Categoria){
-    return <ul>
-        {
-            cat.children.map( (child,i) => 
-                <li key={i}>
-                    <p>
-                        {child.name}
-                    </p>
-                    {   
-                        (child.children && child.children.length > 0) &&
-                        catChildren(child)
-                    }
-                </li>
-               
-            )
-        }
-    </ul>
-}
+
