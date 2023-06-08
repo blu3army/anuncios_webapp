@@ -74,8 +74,6 @@ let subcategoriasData = [
 export function treeGenerator(...categoriaArrays:CategoriaData[][]):Categoria[]{
     
     let tree = [];
-    
-
     //Recorremos el primer nivel
     for (const catData of categoriaArrays[0]) {
         
@@ -87,10 +85,6 @@ export function treeGenerator(...categoriaArrays:CategoriaData[][]):Categoria[]{
         tree.push(newCat);
     }
 
-
-
-
-    // return arr.map( (c)=> new Categoria({name: c.name, code: c.code}) )
     return tree;
 }
 
@@ -102,7 +96,7 @@ function walkChildren(cat:Categoria, childrenCodes:string[], pointer:number,  ..
     }
 
     //Recorremos los hijos del primer nivel, siempre que tenga
-    if(childrenCodes && childrenCodes.length > 0){
+    if(childrenCodes.length > 0){
         for (const childCode of childrenCodes) {
             //Buscamos dentro del siguiente nivel
             for (const sub of nextDataArray[pointer]) {

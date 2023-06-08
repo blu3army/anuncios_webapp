@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next';
 import { CitiesDB } from '@/databases/cities-db';
-import { tree, treeGenerator } from '@/databases/categorias-tree';
+import { tree } from '@/databases/categorias-tree';
 
 
 //Metadatas
@@ -20,7 +20,7 @@ export default function Home() {
     console.log("tree[0].children[0].children", tree[0].children[1].children);
     
     
-
+       
 
     return (
         <main className="">
@@ -54,7 +54,23 @@ export default function Home() {
 
             {/* Una vez que tenemos ciudad seleccionada, mostramos rubros y categorias */}
             <div>
+            </div>
 
+            
+
+            <div className='mt-10'>
+                {
+                    tree.map( (cat,i) => 
+                        <p key={i}>
+                            <p>
+                                {cat.name}
+                            </p>
+                            {
+                                catChildren(cat)
+                            }
+                        </p>
+                    )
+                }
             </div>
 
 
@@ -64,4 +80,21 @@ export default function Home() {
 }
 
 
-
+function catChildren(cat:Categoria){
+    return <ul>
+        {
+            cat.children.map( (child,i) => 
+                <li key={i}>
+                    <p>
+                        {child.name}
+                    </p>
+                    {   
+                        (child.children && child.children.length > 0) &&
+                        catChildren(child)
+                    }
+                </li>
+               
+            )
+        }
+    </ul>
+}
