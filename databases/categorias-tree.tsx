@@ -147,6 +147,35 @@ function walkChildren(cat:Categoria, childrenCodes:string[], pointer:number,  ..
 
 }
 
+export function searchCategoria(id:string, arr:Categoria[]) : Categoria | null {
+    
+    for (const cat of arr) {
+        
+        if(cat.code === id){
+            return cat;
+        }
+
+        if(cat.children.length > 0){
+        
+            let result = searchCategoria(id, cat.children);
+            
+            if(result === null){
+                continue;
+            }
+            else{
+                return result;
+            }
+
+
+        }
+
+    }
+
+    return null;
+
+
+
+}
 
 
 

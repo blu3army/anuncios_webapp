@@ -1,3 +1,5 @@
+import { searchCategoria, tree } from "@/databases/categorias-tree";
+import Link from "next/link";
 
 
 export default function Page({params}:{params:{
@@ -5,24 +7,22 @@ export default function Page({params}:{params:{
 }}){
 
 
-    console.log(params);
-    
-
+    const cityCode = params.queries[0]; 
+    const cat = searchCategoria(params.queries[1], tree ); 
 
     return(
         <div>
             <h1>Resultados de la busqueda</h1>
+
+            <Link href={`/home/${cityCode}`} className="link-1">
+                Back
+            </Link>
+
             <p>
-                {params.queries[0]}
+                City: {params.queries[0]}
             </p>
             <p>
-                {params.queries[1]}
-            </p>
-            <p>
-                {params.queries[2]}
-            </p>
-            <p>
-                {params.queries[3]}
+                Categoria buscada: { cat?.name }
             </p>
         </div>
     );
