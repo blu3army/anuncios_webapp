@@ -1,6 +1,9 @@
-import { tree } from "@/databases/categorias-tree";
 import { Categoria } from "@/models/Categoria";
 import Link from "next/link";
+import { UserDisplay } from "../../../components/user-display";
+import UserProvider from "@/providers/user-provider";
+import CatTreeProvider from "@/providers/cat-tree-provider";
+import CatsDisplay from "./cats-display";
 
 export default function Page({
     params
@@ -8,6 +11,7 @@ export default function Page({
     params: {citycode:string}
 }
 ){
+
 
     const {citycode} = params;
 
@@ -18,23 +22,15 @@ export default function Page({
                 Buscar en otra city
             </Link>
 
+            
+            <UserProvider>
+                <UserDisplay/>
+            </UserProvider>
+            
 
-
-            <ul className='mt-10 flex'>
-                {
-                    tree.map( (cat,i) => 
-                        <li key={i} className='mx-10'>
-                            <Link href={`/results/${citycode}/${cat.code}`}>
-                                {cat.name}
-                            </Link>
-                            {
-                                (cat.children.length > 0) &&
-                                catChildren(cat)
-                            }
-                        </li>
-                    )
-                }
-            </ul>
+            <CatTreeProvider>
+                <CatsDisplay cityCode={citycode} />
+            </CatTreeProvider>
 
 
         </div>
@@ -46,23 +42,5 @@ export default function Page({
 
 
 
-    //Fn recursiva que se encarga de recorrer y renderizar el arbol de categorias
-    function catChildren(cat:Categoria){
-        return <ul>
-            {
-                cat.children.map( (child,i) => 
-                    <li key={i}>
-                        <Link href={`/results/${citycode}/${child.code}`}>
-                            {child.name}  ---- Has children: {child.children.length > 0 ? "si" : "no"}
-                        </Link>
-                        {   
-                            (child.children && child.children.length > 0) &&
-                            catChildren(child)
-                        }
-                    </li>
-                   
-                )
-            }
-        </ul>
-    }
+    
 }

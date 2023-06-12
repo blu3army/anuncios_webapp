@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { Metadata } from 'next';
-import { CitiesDB } from '@/databases/cities-db';
+import { citiesDB } from '@/databases/cities-db';
 import { tree } from '@/databases/categorias-tree';
 import { Categoria } from '@/models/Categoria';
 
@@ -13,15 +13,6 @@ export const metadata : Metadata = {
 //Page
 export default function Home() {
 
-
-    // console.log("root",tree);
-    // console.log("tree[0]", tree[0]);
-    // console.log("tree[0].children", tree[0].children);
-    // console.log("tree[0].children[0]", tree[0].children[0]);
-    console.log("tree[0].children[0].children", tree[0].children[1].children);
-    
-    
-       
 
     return (
         <main className="">
@@ -40,7 +31,7 @@ export default function Home() {
                 <div>
                     
                     {
-                        CitiesDB.map((city, i)=>
+                        citiesDB.map((city, i)=>
                             <Link href={`/home/${city.code}`} key={i}>
                                 <p>
                                     {city.name}

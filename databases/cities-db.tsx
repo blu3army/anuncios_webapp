@@ -1,6 +1,6 @@
 import { City } from "@/models/City";
 
-export const CitiesDB : City[] = [
+export const citiesDB : City[] = [
     new City({
         code: 'posadas',
         name: 'Posadas',

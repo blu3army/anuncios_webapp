@@ -1,6 +1,7 @@
 import '@/css/globals.css';
 import '@/css/titles.css';
 import '@/css/buttons.css';
+import UserProvider from '@/providers/user_provider';
 
 
 export const metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
                     <div className='bg-blue-200 py-1 mb-1'>
                         <h1 className='font-semibold text-lg'>Barra de navegación general</h1>
                     </div>
+                    
                     {children}
+                    
                 </div>
             </body>
         </html>

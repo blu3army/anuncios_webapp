@@ -1,4 +1,5 @@
 import { Categoria } from "./Categoria";
+import { City } from "./City";
 import { User } from "./User";
 
 
@@ -12,15 +13,19 @@ interface AnuncioInterface{
 
     categoriaTree:  Categoria[];
     author: User;
+    
+    city: City;
+    location: {
+        lat: number;
+        lng: number;
+    }
 
-    getTitle():string;
+    
 
 }
 
-class Anuncio implements AnuncioInterface {
-    constructor(parameters) {
-        
-    }
+export class Anuncio implements AnuncioInterface {
+    
     code: string;
     title: string;
     desc: string;
@@ -28,7 +33,34 @@ class Anuncio implements AnuncioInterface {
     date: number;
     categoriaTree: Categoria[];
     author: User;
-    getTitle(): string {
-        throw new Error("Method not implemented.");
+    city: City;
+    location: { lat: number; lng: number; };
+
+    constructor({
+        code,
+        title,
+        desc,
+        descHTML,
+        date,
+        categoriaTree,
+        author,
+        city,
+        location,
+    }:AnuncioInterface) {
+        this.code = code;
+        this.title = title;
+        this.desc = desc;
+        this.descHTML = descHTML;
+        this.date = date;
+        this.categoriaTree = categoriaTree;
+        this.author = author;
+        this.city = city;
+        this.location = location;
     }
+    
+
+    
+
+
+
 }

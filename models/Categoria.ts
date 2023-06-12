@@ -1,3 +1,9 @@
+export type CategoriaData = {
+    code: string,
+    name: string,
+    children?: string[],
+}
+
 
 interface CategoriaInterface {
 

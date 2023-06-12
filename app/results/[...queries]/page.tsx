@@ -1,4 +1,6 @@
-import { searchCategoria, tree } from "@/databases/categorias-tree";
+import CatPathDisplay from "@/components/cat-path-display";
+import CatTreeProvider from "@/providers/cat-tree-provider";
+
 import Link from "next/link";
 
 
@@ -8,8 +10,7 @@ export default function Page({params}:{params:{
 
 
     const cityCode = params.queries[0]; 
-    const cat = searchCategoria(params.queries[1], tree ); 
-
+    const catCode = params.queries[1];
     return(
         <div>
             <h1>Resultados de la busqueda</h1>
@@ -21,9 +22,18 @@ export default function Page({params}:{params:{
             <p>
                 City: {params.queries[0]}
             </p>
-            <p>
-                Categoria buscada: { cat?.name }
-            </p>
+
+            
+            <div className="flex">
+                <span className="mr-2">
+                    {cityCode}
+                </span>
+                <CatTreeProvider>
+                    <CatPathDisplay catCode={catCode} />
+                </CatTreeProvider>
+            </div>
+            
+
         </div>
     );
 }
